@@ -23,9 +23,12 @@ pipeline {
         }
         stage('Say Hello') {
             steps {
+                sh 'pwd'
                 sh '''
                     echo "Hello message: $HELLO_MSG"
                     echo "ENV-1 : $ENV1"
+                    env
+                    ls -la
                 '''
             }
         }
