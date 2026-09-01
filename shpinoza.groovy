@@ -23,10 +23,6 @@ pipeline {
         }
         stage('Say Hello') {
             steps {
-                script {
-                    echo "Hello message: ${param.HELLO_MSG}"
-                    echo "ENV-1 : ${env.ENV1}"
-                }
                 sh '''
                     echo "Hello message: $HELLO_MSG"
                     echo "ENV-1 : $ENV1"
