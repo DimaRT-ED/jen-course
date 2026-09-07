@@ -30,18 +30,25 @@ pipeline {
                 '''
             }
         }
-        stage('Stage 2') {
-            steps {
-                sh 'pwd'
-                retry(3) {
-                    sh '''
-                        cat stam.txt
-                        sleep 5
-                    '''
+        stage('PARALLEL_TASKs') {
+            parallel{
+                stage('1-Stage') {
+                    steps {
+                        retry(3) {
+                            sh '''
+                                cat stam.txt
+                            '''
+                        }
+                        sh 'sleep 5'
+                    }
                 }
-                timeout(time: 5, unit: 'SECONDS') {
-                    sh 'sleep 5'
-                    sh 'echo  sleeping'
+                stage('2-Stage') {
+                    steps {
+                        sh '''
+                            sleep 2
+                            echo "HALELUYA" >> stam.txt
+                        '''
+                    }
                 }
             }
         }
