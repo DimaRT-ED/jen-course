@@ -26,7 +26,7 @@ pipeline {
                 sh 'pwd'
                 sh '''
                     echo "Hello message: $HELLO_MSG"
-                    echo "ENV-1 : $ENV1"
+                    echo "ENVIRONMENT : $ENVIRONMENT"
                 '''
             }
         }
