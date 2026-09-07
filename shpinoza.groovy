@@ -36,16 +36,16 @@ pipeline {
                     steps {
                         retry(3) {
                             sh '''
+                                sleep 3
                                 cat stam.txt
                             '''
                         }
-                        sh 'sleep 5'
                     }
                 }
                 stage('2-Stage') {
                     steps {
                         sh '''
-                            sleep 2
+                            sleep 5
                             echo "HALELUYA" >> stam.txt
                         '''
                     }
