@@ -38,6 +38,7 @@ pipeline {
                 retry(3) {
                     sh '''
                         cat stam.txt
+                        sh 'sleep 5'
                     '''
                 }
                 timeout(time: 5, unit: 'SECONDS') {
