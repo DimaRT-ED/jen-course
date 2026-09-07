@@ -32,6 +32,14 @@ pipeline {
                 '''
             }
         }
+        stage('Stage 2') {
+            steps {
+                sh 'pwd'
+                sh '''
+                    cat stam.txt
+                '''
+            }
+        }
     }
     post {
         success {
