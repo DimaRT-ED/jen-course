@@ -27,8 +27,6 @@ pipeline {
                 sh '''
                     echo "Hello message: $HELLO_MSG"
                     echo "ENV-1 : $ENV1"
-                    env
-                    ls -la
                 '''
             }
         }
@@ -38,7 +36,7 @@ pipeline {
                 retry(3) {
                     sh '''
                         cat stam.txt
-                        sh 'sleep 5'
+                        sleep 5
                     '''
                 }
                 timeout(time: 5, unit: 'SECONDS') {
