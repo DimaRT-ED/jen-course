@@ -25,31 +25,10 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh '''
+                    sleep 2
                     echo "Hello message: $HELLO_MSG"
                     echo "ENVIRONMENT : $ENVIRONMENT"
                 '''
-            }
-        }
-        stage('PARALLEL_TASKs') {
-            parallel{
-                stage('1-Stage') {
-                    steps {
-                        retry(3) {
-                            sh '''
-                                sleep 3
-                                cat stam.txt
-                            '''
-                        }
-                    }
-                }
-                stage('2-Stage') {
-                    steps {
-                        sh '''
-                            sleep 5
-                            echo "HALELUYA" >> stam.txt
-                        '''
-                    }
-                }
             }
         }
     }
