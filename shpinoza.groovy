@@ -40,7 +40,10 @@ pipeline {
                         cat stam.txt
                     '''
                 }
-                
+                timeout(time: 5, unit: 'SECONDS') {
+                    sh 'sleep 5'
+                    sh 'echo  sleeping'
+                }
             }
         }
     }
