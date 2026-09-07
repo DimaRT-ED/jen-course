@@ -35,9 +35,12 @@ pipeline {
         stage('Stage 2') {
             steps {
                 sh 'pwd'
-                sh '''
-                    cat stam.txt
-                '''
+                retry(3) {
+                    sh '''
+                        cat stam.txt
+                    '''
+                }
+                
             }
         }
     }
