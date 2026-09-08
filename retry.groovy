@@ -8,29 +8,30 @@ pipeline {
         OWNER = "Dima"
         PROJECT = "Jenkins course"
     }
-
     stages {
-        stage('Parallel Stages') {
-            parallel {
-                stage('Read file 2.txt') {
-                    steps {
-                        retry(3) {
-                            sh '''
-                                sleep 3
-                                ls -la
-                                cat 2.txt
-                            '''
-                        }
+        stage('CLEAN') {
+            steps {
+                echo "--- START CLEAN ---"
+                cleanWs()
+                echo "--- FINISH CLEAN ---"
+            }
+        }
+        stage('parallel') {
+            steps {
+                parallel(
+                    job1: {
+                        build job: 'jjjjob1',
+                               parameters: [string(name: 'NAME', value: "HELLO PARALLEL ____  1 !!!")],
+                               wait: true,
+                               propagate: true
+                    },
+                    job2: {
+                        build job: 'jjjjob2',
+                               parameters: [string(name: 'NAME', value: "HELLO PARALLEL ____  2 !!!")],
+                               wait: true,
+                               propagate: true
                     }
-                }
-                stage('Create file 2.txt') {
-                    steps {
-                        sh'''
-                            sleep 5
-                            echo "HELLO FROM STAGE 2" >> 2.txt
-                        '''
-                    }
-                }
+                )
             }
         }
     }
