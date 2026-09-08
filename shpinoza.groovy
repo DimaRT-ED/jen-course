@@ -31,6 +31,22 @@ pipeline {
                 '''
             }
         }
+        stage('Clone Repository via SSH') {
+            steps {
+                withCredentials([sshUserPrivateKey(
+                    credentialsId: 'DimaRT-ED', 
+                    keyFileVariable: 'SSH_KEY'
+                )]) {
+                    // Tell Git to use the specific private key file provided by Jenkins
+                    // export GIT_SSH_COMMAND="ssh -i ${SSH_KEY} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+                    sh """
+                        ls -la
+                        git clone git@github.com:DimaRT-ED/taasuka_action.git
+                        ls -la
+                    """
+                }
+            }
+        }
     }
     post {
         success {
